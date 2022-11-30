@@ -46,7 +46,13 @@ const SEAFOOD = `${MEAL_API}filter.php?c=Seafood`
 function loadRandomMeal(){
 
     //TODO: fill in the function
+    const mealsPromise = fetch(RADNOM_MEALS)
 
+    mealsPromise.then(response => response.json()).then(body => {
+        const meal = body.meals[0]
+        const food = createFoodItem(meal["strMealThumb"], meal["strMeal"])
+        appendElement(food, "random-meal")
+    })
 }
 
 // function to load list of seafoods
@@ -62,7 +68,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     print(`Event loaded: ${event.type}`)
 
     // show random food
-
+    loadRandomMeal()
 
     // show list of sea food
 
